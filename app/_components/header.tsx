@@ -26,7 +26,7 @@ const Header = () => {
   const router = useRouter();
   const { data, status } = useSession();
   return (
-    <div className="flex items-center justify-between px-5 py-6">
+    <div className="flex items-center justify-between border-b border-muted-foreground px-5 py-6">
       <Image src="/Logo.png" alt="Logo" width={130} height={22} />
       <Sheet>
         <SheetTrigger asChild>
