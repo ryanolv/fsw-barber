@@ -9,10 +9,19 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./ui/sheet";
-import { CalendarCheck, HomeIcon, LogInIcon, MenuIcon } from "lucide-react";
+import {
+  CalendarCheck,
+  HomeIcon,
+  LogInIcon,
+  LogOutIcon,
+  MenuIcon,
+} from "lucide-react";
 import { Separator } from "./ui/separator";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 const Header = () => {
+  const { data, status } = useSession();
   return (
     <div className="flex items-center justify-between px-5 py-6">
       <Image src="/Logo.png" alt="Logo" width={130} height={22} />
@@ -26,12 +35,25 @@ const Header = () => {
           <SheetHeader>
             <SheetTitle className="text-white">Menu</SheetTitle>
           </SheetHeader>
-          <div className="flex items-center justify-between py-5">
-            <h1 className="text-lg font-bold">Olá. Faça seu login!</h1>
-            <Button size="icon">
-              <LogInIcon size={24} />
-            </Button>
-          </div>
+          {status === "unauthenticated" ? (
+            <div className="flex items-center justify-between py-5">
+              <h1 className="text-lg font-bold">Olá. Faça seu login!</h1>
+              <Button size="icon" onClick={() => signIn()}>
+                <LogInIcon size={24} />
+              </Button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2.5 py-5">
+              <Avatar className="h-12 w-12">
+                <AvatarImage src={data?.user?.image as string} />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <div>
+                <h1 className="font-bold">{data?.user?.name}</h1>
+                <p className="text-xs text-gray-300">{data?.user?.email}</p>
+              </div>
+            </div>
+          )}
 
           <Separator />
 
@@ -47,6 +69,19 @@ const Header = () => {
           </div>
 
           <Separator />
+
+          {status === "authenticated" && (
+            <div className="py-5">
+              <Button
+                variant="ghost"
+                className="flex w-full justify-start text-gray-200"
+                onClick={() => signOut()}
+              >
+                <LogOutIcon size={24} />
+                <span className="ml-2">Saír da conta</span>
+              </Button>
+            </div>
+          )}
         </SheetContent>
       </Sheet>
     </div>
