@@ -19,8 +19,11 @@ import {
 import { Separator } from "./ui/separator";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { usePathname, useRouter } from "next/navigation";
 
 const Header = () => {
+  const pathname = usePathname();
+  const router = useRouter();
   const { data, status } = useSession();
   return (
     <div className="flex items-center justify-between px-5 py-6">
@@ -58,11 +61,19 @@ const Header = () => {
           <Separator />
 
           <div className="flex flex-col gap-1 py-5">
-            <Button variant="ghost" className="flex justify-start">
+            <Button
+              variant="ghost"
+              className={`flex justify-start ${pathname === "/" && "bg-primary"}`}
+              onClick={() => router.push("/")}
+            >
               <HomeIcon size={24} />
               <span className="ml-2">Início</span>
             </Button>
-            <Button variant="ghost" className="flex justify-start">
+            <Button
+              variant="ghost"
+              className={`flex justify-start ${pathname === "/appointments" && "bg-primary"}`}
+              onClick={() => router.push("/appointments")}
+            >
               <CalendarCheck size={24} />
               <span className="ml-2">Agendamentos</span>
             </Button>
