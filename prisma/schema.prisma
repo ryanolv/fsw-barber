@@ -24,7 +24,7 @@ model Barbershop {
   updatedAt   DateTime            @updatedAt
   services    BarbershopService[]
 
-  @@map("barbershops")
+  
 }
 
 model BarbershopService {
@@ -33,10 +33,10 @@ model BarbershopService {
   description  String
   imageUrl     String
   price        Decimal    @db.Decimal(10, 2)
-  barberShopId String
-  barberShop   Barbershop @relation(fields: [barberShopId], references: [id])
+  barbershopId String
+  barbershop   Barbershop @relation(fields: [barbershopId], references: [id])
 
-  @@map("barbershop_services")
+  
 }
 
 model Account {
