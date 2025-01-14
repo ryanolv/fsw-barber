@@ -1,6 +1,7 @@
 import { Barbershop } from "@prisma/client";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import Link from "next/link";
 
 const BarbershopItem = ({ barbershop }: { barbershop: Barbershop }) => {
   return (
@@ -18,8 +19,11 @@ const BarbershopItem = ({ barbershop }: { barbershop: Barbershop }) => {
           <h1 className="truncate font-bold">{barbershop.name}</h1>
           <p className="text-xs text-accent">{barbershop.address}</p>
         </div>
-        <Button className="w-full rounded-xl bg-muted hover:bg-muted-foreground">
-          Reservar
+        <Button
+          className="w-full rounded-xl bg-muted hover:bg-muted-foreground"
+          asChild
+        >
+          <Link href={`/barbershops/${barbershop.id}`}>Reservar</Link>
         </Button>
       </div>
     </div>
