@@ -9,7 +9,7 @@ const QuickSearch = () => {
     "Hidratação",
   ];
   return (
-    <div className="no-wrap scrollbar-hide flex gap-3 overflow-scroll px-5 py-6">
+    <div className="flex gap-3 overflow-scroll px-5 py-6 scrollbar-hide">
       {typeServices.map((service) => (
         <Button
           key={service}
