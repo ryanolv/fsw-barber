@@ -1,13 +1,13 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 
 const HelloMessage = () => {
   const { data, status } = useSession();
-  const formattedDate = format(new Date(), "EEEE, d 'de' MMMM", {
-    locale: ptBR,
+  const formattedDate = new Date().toLocaleDateString("pt-BR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
   });
   const name = data?.user?.name?.split(" ")[0];
   return (
