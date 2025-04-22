@@ -7,7 +7,11 @@ const ServicesBarbershop = ({ barbershop }: { barbershop: BarbershopDTO }) => {
       <h2 className="text-xs font-bold text-accent">SERVIÇOS</h2>
       <div className="space-y-3">
         {barbershop.services.map((service) => (
-          <ServiceBarbershopItem key={service.id} service={service} />
+          <ServiceBarbershopItem
+            key={service.id}
+            service={service}
+            barbershopName={barbershop.name}
+          />
         ))}
       </div>
     </div>

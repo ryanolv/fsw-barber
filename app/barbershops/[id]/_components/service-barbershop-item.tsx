@@ -6,8 +6,10 @@ import BookingService from "./booking-service";
 
 const ServiceBarbershopItem = ({
   service,
+  barbershopName,
 }: {
   service: BarbershopServiceDTO;
+  barbershopName: string;
 }) => {
   return (
     <Sheet>
@@ -21,7 +23,7 @@ const ServiceBarbershopItem = ({
             className="rounded-lg object-cover"
           />
         </div>
-        <div className="col-span-2">
+        <div className="col-span-2 flex flex-col justify-between">
           <div>
             <h2 className="text-sm font-bold text-white">{service.name}</h2>
             <p className="text-sm text-accent">{service.description}</p>
@@ -31,12 +33,15 @@ const ServiceBarbershopItem = ({
               R${service.price}
             </h3>
             <SheetTrigger asChild>
-              <Button className="rounded-xl bg-muted hover:bg-muted-foreground">
+              <Button className="h-[36px] w-[90px] rounded-xl bg-muted font-bold hover:bg-muted-foreground">
                 Reservar
               </Button>
             </SheetTrigger>
             <SheetContent className="w-[95%] border-none text-white">
-              <BookingService />
+              <BookingService
+                service={service}
+                barbershopName={barbershopName}
+              />
             </SheetContent>
           </div>
         </div>
