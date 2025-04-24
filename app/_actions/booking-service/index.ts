@@ -26,6 +26,6 @@ export const bookingService = async ({
     console.error("Error booking service:", error);
     throw new Error("Error booking service");
   } finally {
-    redirect("/appointments");
+    redirect(`/appointments/${userId}`);
   }
 };
