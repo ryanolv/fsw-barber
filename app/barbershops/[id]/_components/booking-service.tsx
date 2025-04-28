@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
-import { format, isBefore, set, startOfToday } from "date-fns";
+import { isBefore, set, startOfToday } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useSession } from "next-auth/react";
 
@@ -11,7 +12,6 @@ import { bookingService } from "@/app/_actions/booking-service";
 import { Calendar } from "@/app/_components/ui/calendar";
 import { Separator } from "@/app/_components/ui/separator";
 import { Button } from "@/app/_components/ui/button";
-import { Card } from "@/app/_components/ui/card";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,7 +23,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/app/_components/ui/alert-dialog";
-import Image from "next/image";
+import SummaryAppointment from "@/app/_components/summary-appointment";
 
 const HOURS_FREE = [
   "08:00",
@@ -112,26 +112,12 @@ const BookingService = ({
         </div>
         <Separator className="mb-6 bg-muted" />
 
-        <Card className="space-y-2 border-muted bg-foreground p-4 text-white">
-          <div className="flex justify-between font-bold">
-            <p>{service.name}</p>
-            <p className="text-sm font-bold">R${service.price}</p>
-          </div>
-          <div className="flex justify-between">
-            <p className="text-sm text-accent">Data</p>
-            <p className="text-sm">
-              {selectedDay ? format(selectedDay, "dd/MM/yyyy") : ""}
-            </p>
-          </div>
-          <div className="flex justify-between">
-            <p className="text-sm text-accent">Horário</p>
-            <p className="text-sm">{selectedHour}</p>
-          </div>
-          <div className="flex justify-between">
-            <p className="text-sm text-accent">Barbearia</p>
-            <p className="text-sm">{barbershopName}</p>
-          </div>
-        </Card>
+        <SummaryAppointment
+          service={service}
+          barbershopName={barbershopName}
+          selectedDay={selectedDay}
+          selectedHour={selectedHour}
+        />
         <AlertDialogTrigger asChild>
           <Button className="mt-auto w-full rounded-xl">Confirmar</Button>
         </AlertDialogTrigger>
