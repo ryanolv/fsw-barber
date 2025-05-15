@@ -35,6 +35,9 @@ export const getNextAppointmentForUser = async (
       userId,
       date: { gt: new Date() },
     },
+    orderBy: {
+      date: "asc",
+    },
     select: {
       id: true,
       date: true,
