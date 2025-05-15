@@ -9,6 +9,7 @@ import HelloMessage from "./_components/hello-message";
 import QuickSearch from "./_components/quick-search";
 import Search from "./_components/search";
 import PopularBarbershops from "./_components/popular-barbershops";
+import AppointmentItem from "../_components/appointment-item";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
