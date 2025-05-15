@@ -1,7 +1,18 @@
+"use client"
+
 import { Button } from "@/app/_components/ui/button";
 import { Smartphone } from "lucide-react";
+import { toast } from "sonner";
 
 const PhonesBarbershop = ({ phones }: { phones: string[] }) => {
+
+  const handleCopyPhone = (phone: string) => {
+    navigator.clipboard.writeText(phone);
+    toast.success('Telefone copiado para a área de transferência!', {
+      className: 'text-white',
+    });
+  }
+
   return (
     <div className="space-y-3 px-5 pb-12">
       <h2 className="text-xs font-bold text-accent">CONTATO</h2>
@@ -12,7 +23,7 @@ const PhonesBarbershop = ({ phones }: { phones: string[] }) => {
               <Smartphone size={24} />
               <p>{phone}</p>
             </div>
-            <Button variant="outline" className="rounded-xl border-muted">
+            <Button variant="outline" className="rounded-xl border-muted" onClick={() => handleCopyPhone(phone)}>
               Copiar
             </Button>
           </div>
