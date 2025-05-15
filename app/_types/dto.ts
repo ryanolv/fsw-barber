@@ -3,6 +3,7 @@ export type AppointmentDTO = {
   date: Date;
   service: {
     name: string;
+    price: number;
     barbershop: {
       name: string;
       imageUrl: string;

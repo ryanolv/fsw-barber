@@ -14,6 +14,7 @@ export const getAppointmentsByUser = async (
       service: {
         select: {
           name: true,
+          price: true,
           barbershop: {
             select: {
               name: true,
@@ -44,6 +45,7 @@ export const getNextAppointmentForUser = async (
       service: {
         select: {
           name: true,
+          price: true,
           barbershop: {
             select: {
               name: true,
