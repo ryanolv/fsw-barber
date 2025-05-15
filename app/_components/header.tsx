@@ -51,9 +51,12 @@ const Header = () => {
             <div className="flex items-center gap-2.5 py-5">
               <Avatar className="h-12 w-12">
                 <AvatarImage src={session?.user?.image as string} />
+                <AvatarImage src={session?.user?.image as string} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <div>
+                <h1 className="font-bold">{session?.user?.name}</h1>
+                <p className="text-xs text-gray-300">{session?.user?.email}</p>
                 <h1 className="font-bold">{session?.user?.name}</h1>
                 <p className="text-xs text-gray-300">{session?.user?.email}</p>
               </div>

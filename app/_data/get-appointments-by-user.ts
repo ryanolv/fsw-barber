@@ -26,15 +26,17 @@ export const getAppointmentsByUser = async (
   });
 };
 
-export const getNextAppointmentByUser = async (
-  userId: string,
+export const getNextAppointmentForUser = async (
+  userId: string | undefined,
 ): Promise<AppointmentDTO | null> => {
+  if (userId === undefined) return null;
   return await db.booking.findFirst({
     where: {
       userId,
-      date: {
-        gte: new Date(),
-      },
+      date: { gt: new Date() },
+    },
+    orderBy: {
+      date: "asc",
     },
     select: {
       id: true,
