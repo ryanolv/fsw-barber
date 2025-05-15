@@ -1,7 +1,10 @@
 import { getAppointmentsByUser } from "@/app/_data/get-appointments-by-user";
+import { AppointmentDTO } from "@/app/_types/dto";
+
+import { Sheet, SheetTrigger } from "@/app/_components/ui/sheet";
 import Header from "../../_components/header";
 import AppointmentItem from "@/app/_components/appointment-item";
-import { AppointmentDTO } from "@/app/_types/dto";
+import DetailsAppointment from "./_components/details-appointment";
 
 const AppointmentsPage = async ({
   params: { userId },
@@ -18,7 +21,12 @@ const AppointmentsPage = async ({
         <div className="flex flex-col gap-4 py-6">
           <h3 className="text-sm text-accent">CONFIRMADOS</h3>
           {appointmentsByUser.map((appointment) => (
-            <AppointmentItem key={appointment.id} appointment={appointment} />
+            <Sheet key={appointment.id}>
+              <SheetTrigger>
+                <AppointmentItem appointment={appointment} />
+              </SheetTrigger>
+                <DetailsAppointment appointment={appointment} />
+            </Sheet>
           ))}
         </div>
       </div>
