@@ -24,7 +24,7 @@ import { usePathname, useRouter } from "next/navigation";
 const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { data, status } = useSession();
+  const { data: session, status } = useSession();
   return (
     <div className="flex items-center justify-between border-b border-muted-foreground px-5 py-6">
       <Image src="/Logo.png" alt="Logo" width={130} height={22} />
@@ -48,12 +48,12 @@ const Header = () => {
           ) : (
             <div className="flex items-center gap-2.5 py-5">
               <Avatar className="h-12 w-12">
-                <AvatarImage src={data?.user?.image as string} />
+                <AvatarImage src={session?.user?.image as string} />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
               <div>
-                <h1 className="font-bold">{data?.user?.name}</h1>
-                <p className="text-xs text-gray-300">{data?.user?.email}</p>
+                <h1 className="font-bold">{session?.user?.name}</h1>
+                <p className="text-xs text-gray-300">{session?.user?.email}</p>
               </div>
             </div>
           )}
@@ -71,8 +71,8 @@ const Header = () => {
             </Button>
             <Button
               variant="ghost"
-              className={`flex justify-start ${pathname === "/appointments" && "bg-primary"}`}
-              onClick={() => router.push("/appointments")}
+              className={`flex justify-start ${pathname === `/appointments/${session?.user?.id}` && "bg-primary"}`}
+              onClick={() => router.push(`/appointments/${session?.user?.id}`)}
             >
               <CalendarCheck size={24} />
               <span className="ml-2">Agendamentos</span>
