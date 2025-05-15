@@ -25,3 +25,30 @@ export const getAppointmentsByUser = async (
     },
   });
 };
+
+export const getNextAppointmentForUser = async (
+  userId: string | undefined,
+): Promise<AppointmentDTO | null> => {
+  if (userId === undefined) return null;
+  return await db.booking.findFirst({
+    where: {
+      userId,
+      date: { gt: new Date() },
+    },
+    select: {
+      id: true,
+      date: true,
+      service: {
+        select: {
+          name: true,
+          barbershop: {
+            select: {
+              name: true,
+              imageUrl: true,
+            },
+          },
+        },
+      },
+    },
+  });
+};
