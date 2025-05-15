@@ -7,6 +7,7 @@ export type AppointmentDTO = {
     barbershop: {
       name: string;
       imageUrl: string;
+      phones: string[];
     };
   };
 };

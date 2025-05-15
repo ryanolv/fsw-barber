@@ -19,6 +19,7 @@ export const getAppointmentsByUser = async (
             select: {
               name: true,
               imageUrl: true,
+              phones: true,
             },
           },
         },
@@ -50,6 +51,7 @@ export const getNextAppointmentForUser = async (
             select: {
               name: true,
               imageUrl: true,
+              phones: true,
             },
           },
         },
