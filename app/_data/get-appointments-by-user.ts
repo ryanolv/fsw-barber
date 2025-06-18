@@ -4,7 +4,7 @@ import { AppointmentDTO } from "../_types/dto";
 export const getAppointmentsByUser = async (
   userId: string,
 ): Promise<AppointmentDTO[]> => {
-  return await db.booking.findMany({
+  const appointments = await db.booking.findMany({
     where: {
       userId,
     },
@@ -26,13 +26,21 @@ export const getAppointmentsByUser = async (
       },
     },
   });
+
+  return appointments.map((appointment) => ({
+    ...appointment,
+    service: {
+      ...appointment.service,
+      price: Number(appointment.service.price),
+    },
+  }));
 };
 
 export const getNextAppointmentForUser = async (
   userId: string | undefined,
 ): Promise<AppointmentDTO | null> => {
   if (userId === undefined) return null;
-  return await db.booking.findFirst({
+  const appointment = await db.booking.findFirst({
     where: {
       userId,
       date: { gt: new Date() },
@@ -58,4 +66,16 @@ export const getNextAppointmentForUser = async (
       },
     },
   });
+
+  if (!appointment) {
+    return null;
+  }
+
+  return {
+    ...appointment,
+    service: {
+      ...appointment.service,
+      price: Number(appointment.service.price),
+    },
+  };
 };

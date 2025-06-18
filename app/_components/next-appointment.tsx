@@ -1,4 +1,4 @@
-import { getNextAppointmentByUser } from "../_data/get-appointments-by-user";
+import { getNextAppointmentForUser } from "../_data/get-appointments-by-user";
 import AppointmentItem from "./appointment-item";
 
 interface NextAppointmentProps {
@@ -10,7 +10,7 @@ interface NextAppointmentProps {
 const NextAppointment = async ({
   params: { userId },
 }: NextAppointmentProps) => {
-  const nextAppointment = await getNextAppointmentByUser(userId);
+  const nextAppointment = await getNextAppointmentForUser(userId);
   if (!nextAppointment) return null;
 
   return (
